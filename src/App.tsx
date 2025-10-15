@@ -106,7 +106,7 @@ function App() {
         
         {isLit && (
           <div className="flame-message">
-            <p>"We light this chalice as a symbol of our faith, the warmth of our community, and the light of our truth."</p>
+            <p>"We light this chalice as a symbol of our faith, the warmth of our community, and the light of truth."</p>
           </div>
         )}
       </main>
