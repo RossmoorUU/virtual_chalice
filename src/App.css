@@ -1,0 +1,225 @@
+.app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-header {
+  text-align: center;
+  padding: 2rem;
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  color: #FFD700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.app-header p {
+  font-size: 1.2rem;
+  color: #E6E6FA;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.chalice-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  flex: 1;
+}
+
+.chalice-wrapper {
+  position: relative;
+  margin: 2rem 0;
+}
+
+.chalice-svg {
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+  max-width: 200px;
+  height: auto;
+}
+
+.flame {
+  position: absolute;
+  top: 85px;
+  left: 65%;
+  transform: translateX(-50%);
+  width: 25px;
+  height: 35px;
+  z-index: 10;
+}
+
+.flame-part {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.flame-1 {
+  background: radial-gradient(circle, #ff6b35, #f7931e, #ffcc02);
+  animation: flame-flicker 0.5s ease-in-out infinite alternate;
+  transform-origin: bottom;
+}
+
+.flame-2 {
+  background: radial-gradient(circle, #ff4757, #ff3838, #ff6348);
+  animation: flame-flicker 0.7s ease-in-out infinite alternate;
+  transform: scale(0.8) translateY(10px);
+  transform-origin: bottom;
+}
+
+.flame-3 {
+  background: radial-gradient(circle, #ffa502, #ff6348, #ff4757);
+  animation: flame-flicker 0.6s ease-in-out infinite alternate;
+  transform: scale(0.6) translateY(20px);
+  transform-origin: bottom;
+}
+
+@keyframes flame-flicker {
+  0% {
+    transform: scaleY(1) scaleX(1) rotate(-2deg);
+  }
+  25% {
+    transform: scaleY(1.1) scaleX(0.9) rotate(2deg);
+  }
+  50% {
+    transform: scaleY(0.9) scaleX(1.1) rotate(-1deg);
+  }
+  75% {
+    transform: scaleY(1.05) scaleX(0.95) rotate(1deg);
+  }
+  100% {
+    transform: scaleY(1) scaleX(1) rotate(-1deg);
+  }
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.control-btn {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.control-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.light-btn {
+  background: linear-gradient(45deg, #ff6b35, #f7931e);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.light-btn:hover:not(:disabled) {
+  background: linear-gradient(45deg, #ff7849, #ffa726);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+.light-btn.active {
+  background: linear-gradient(45deg, #4CAF50, #45a049);
+}
+
+.extinguish-btn {
+  background: linear-gradient(45deg, #546e7a, #37474f);
+  color: white;
+  box-shadow: 0 4px 15px rgba(84, 110, 122, 0.3);
+}
+
+.extinguish-btn:hover:not(:disabled) {
+  background: linear-gradient(45deg, #607d8b, #455a64);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(84, 110, 122, 0.4);
+}
+
+.extinguish-btn.active {
+  background: linear-gradient(45deg, #666, #555);
+}
+
+.flame-message {
+  max-width: 600px;
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  margin-top: 2rem;
+  animation: fade-in 0.5s ease-in;
+}
+
+.flame-message p {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #FFD700;
+  margin: 0;
+  line-height: 1.6;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 2rem;
+  }
+  
+  .chalice-svg {
+    max-width: 150px;
+  }
+  
+  .flame {
+    top: 25px;
+    left: 55%;
+    width: 20px;
+    height: 28px;
+  }
+  
+  .controls {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .control-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .flame-message {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  .flame-message p {
+    font-size: 1rem;
+  }
+}
