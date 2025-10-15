@@ -35,7 +35,7 @@ function App() {
             className="chalice-svg" 
             width="200" 
             height="300" 
-            viewBox="0 0 500 449"
+            viewBox="-50 0 600 500"
             xmlns="http://www.w3.org/2000/svg"
           >
             {/* Main chalice body */}
@@ -66,7 +66,7 @@ function App() {
             <circle
               cx="278"
               cy="225" 
-              r="220"
+              r="250"
               fill="none"
               stroke="#FFD700"
               strokeWidth="6"
@@ -77,7 +77,7 @@ function App() {
             <circle
               cx="228"
               cy="225"
-              r="220" 
+              r="250" 
               fill="none"
               stroke="#FFD700"
               strokeWidth="6"
