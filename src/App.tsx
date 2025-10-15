@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
   const [isLit, setIsLit] = useState(false)
+  const [showExtinguishMessage, setShowExtinguishMessage] = useState(false)
 
   const lightChalice = () => {
     setIsLit(true)
@@ -10,7 +11,19 @@ function App() {
 
   const extinguishChalice = () => {
     setIsLit(false)
+    setShowExtinguishMessage(true)
   }
+
+  // Hide extinguish message after 5 seconds
+  useEffect(() => {
+    if (showExtinguishMessage) {
+      const timer = setTimeout(() => {
+        setShowExtinguishMessage(false)
+      }, 5000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [showExtinguishMessage])
 
   return (
     <div className="app">
@@ -107,6 +120,12 @@ function App() {
         {isLit && (
           <div className="flame-message">
             <p>"We light this chalice as a symbol of our faith, the warmth of our community, and the light of truth."</p>
+          </div>
+        )}
+        
+        {showExtinguishMessage && (
+          <div className="extinguish-message">
+            <p>"May the flame we have kindled continue to burn in our hearts and guide us in service to others."</p>
           </div>
         )}
       </main>
