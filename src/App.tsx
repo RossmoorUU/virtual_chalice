@@ -19,7 +19,7 @@ function App() {
     if (showExtinguishMessage) {
       const timer = setTimeout(() => {
         setShowExtinguishMessage(false)
-      }, 5000)
+      }, 10000)
 
       return () => clearTimeout(timer)
     }
