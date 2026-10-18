@@ -1,7 +1,9 @@
 .app {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
-  color: white;
+  /* A soft pool of lighter teal behind the chalice, where the old build had a
+     navy gradient from a different palette entirely. */
+  background: radial-gradient(circle at 50% 32%, #17514f 0%, var(--teal-deep) 62%);
+  color: var(--paper);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,21 +11,22 @@
 
 .app-header {
   text-align: center;
-  padding: 1.5rem;
+  padding: 2.25rem 1.5rem 0.75rem;
 }
 
 .app-header h1 {
-  font-size: 2.5rem;
-  color: #FFD700;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  color: var(--paper);
+  letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  text-shadow: none;
 }
 
 .app-header p {
-  font-size: 1.2rem;
-  color: #E6E6FA;
+  font-size: 1.05rem;
+  color: #cfe0dc;
   margin: 0;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .chalice-container {
@@ -103,20 +106,22 @@
 
 .controls {
   display: flex;
-  gap: 1rem;
-  margin: 1.5rem 0;
+  gap: 0.75rem;
+  margin: 2rem 0;
 }
 
+/* Same pill shape and weight as the buttons on the rest of the site, instead
+   of 8px corners with uppercase letterspacing. */
 .control-btn {
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
+  padding: 0.8rem 1.4rem;
+  font-size: 0.95rem;
   font-weight: 600;
   border: none;
-  border-radius: 8px;
+  border-radius: 999px;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .control-btn:disabled {
@@ -124,45 +129,58 @@
   cursor: not-allowed;
 }
 
+/* The active button is the one showing the chalice's current state, and it is
+   always the disabled one — you cannot light a lit chalice. Fading it made the
+   current state read as an unavailable action, so it keeps full opacity. */
+.control-btn.active:disabled {
+  opacity: 1;
+}
+
 .light-btn {
-  background: linear-gradient(45deg, #ff6b35, #f7931e);
+  background: var(--amber);
   color: white;
-  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+  box-shadow: none;
 }
 
 .light-btn:hover:not(:disabled) {
-  background: linear-gradient(45deg, #ff7849, #ffa726);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+  background: #7e4218;
+  transform: none;
+  box-shadow: none;
 }
 
+/* Lit: the button marks the state rather than offering the action. */
 .light-btn.active {
-  background: linear-gradient(45deg, #4CAF50, #45a049);
+  background: var(--amber);
+  box-shadow: inset 0 0 0 3px rgba(253, 251, 246, 0.35);
 }
 
 .extinguish-btn {
-  background: linear-gradient(45deg, #546e7a, #37474f);
-  color: white;
-  box-shadow: 0 4px 15px rgba(84, 110, 122, 0.3);
+  background: transparent;
+  border: 1.5px solid rgba(253, 251, 246, 0.45);
+  color: var(--paper);
+  box-shadow: none;
 }
 
 .extinguish-btn:hover:not(:disabled) {
-  background: linear-gradient(45deg, #607d8b, #455a64);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(84, 110, 122, 0.4);
+  background: rgba(253, 251, 246, 0.1);
+  border-color: var(--paper);
+  transform: none;
+  box-shadow: none;
 }
 
 .extinguish-btn.active {
-  background: linear-gradient(45deg, #666, #555);
+  background: rgba(253, 251, 246, 0.14);
+  border-color: rgba(253, 251, 246, 0.55);
+  color: var(--paper);
 }
 
 .flame-message {
   max-width: 600px;
   text-align: center;
   padding: 1.2rem;
-  background: rgba(255, 215, 0, 0.1);
+  background: rgba(192, 113, 59, 0.14);
   border-radius: 12px;
-  border: 1px solid rgba(255, 215, 0, 0.2);
+  border: 1px solid rgba(192, 113, 59, 0.35);
   margin-top: 1rem;
   animation: fade-in 0.5s ease-in;
 }
@@ -170,7 +188,7 @@
 .flame-message p {
   font-size: 1.1rem;
   font-style: italic;
-  color: #FFD700;
+  color: #f0dcc9;
   margin: 0;
   line-height: 1.6;
 }
@@ -179,9 +197,9 @@
   max-width: 600px;
   text-align: center;
   padding: 1.2rem;
-  background: rgba(84, 110, 122, 0.1);
+  background: rgba(253, 251, 246, 0.07);
   border-radius: 12px;
-  border: 1px solid rgba(84, 110, 122, 0.2);
+  border: 1px solid rgba(253, 251, 246, 0.2);
   margin-top: 1rem;
   animation: fade-in-out 5s ease-in-out forwards;
 }
@@ -189,7 +207,7 @@
 .extinguish-message p {
   font-size: 1.1rem;
   font-style: italic;
-  color: #B0C4DE;
+  color: #cfe0dc;
   margin: 0;
   line-height: 1.6;
 }
@@ -229,43 +247,43 @@
   .app-header h1 {
     font-size: 2rem;
   }
-  
+
   .chalice-svg {
     max-width: 150px;
   }
-  
+
   .flame {
     top: 65px;
     left: 60%;
     width: 20px;
     height: 28px;
   }
-  
+
   .controls {
     flex-direction: column;
     width: 100%;
     max-width: 300px;
   }
-  
+
   .control-btn {
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
   }
-  
+
   .flame-message {
     margin: 1rem;
     padding: 1rem;
   }
-  
+
   .flame-message p {
     font-size: 1rem;
   }
-  
+
   .extinguish-message {
     margin: 1rem;
     padding: 1rem;
   }
-  
+
   .extinguish-message p {
     font-size: 1rem;
   }

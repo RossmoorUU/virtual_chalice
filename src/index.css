@@ -1,11 +1,28 @@
 :root {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* Site tokens, mirroring rossmooruu-www/assets/css/styles.css, so this page
+     reads as part of rossmooruu.org rather than a separate site. */
+  --paper: #fdfbf6;
+  --ink: #232019;
+  --ink-soft: #5a5348;
+  --teal: #17494a;
+  --teal-deep: #0e3536;
+  --amber: #9c5526;
+  --amber-light: #c0713b;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+
+  font-family: var(--font-body);
   line-height: 1.5;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  /* Matches the rest of the site: 18px rather than 16px. */
+  font-size: 112.5%;
 }
 
 * {
@@ -16,7 +33,11 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  /* Was a navy gradient from a different palette. The site's own dark teal is
+     already the colour of its facts strip and footer, and the flame needs
+     something dark to be lit against. */
+  background: var(--teal-deep);
+  color: var(--paper);
   overflow-x: hidden;
 }
 
@@ -28,6 +49,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: 600;
+  font-family: var(--font-display);
 }
 
 button {
@@ -40,10 +62,33 @@ button {
 
 button:focus,
 button:focus-visible {
-  outline: 2px solid #FFD700;
-  outline-offset: 2px;
+  outline: 3px solid var(--amber-light);
+  outline-offset: 3px;
 }
 
 p {
   margin: 0;
+}
+
+/* The app fills the viewport and carries no site chrome, so there is otherwise
+   no way back to the site. The site's navbar opens this page in a new tab, so
+   this is a courtesy rather than a fix. */
+.site-back {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 20;
+  border: 1px solid rgba(253, 251, 246, 0.25);
+  border-radius: 999px;
+  color: rgba(253, 251, 246, 0.78);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  text-decoration: none;
+}
+
+.site-back:hover {
+  border-color: var(--paper);
+  color: var(--paper);
+  text-decoration: underline;
 }
