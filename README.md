@@ -16,17 +16,14 @@ A beautiful web application that displays a virtual Unitarian Universalist chali
 
 ### Prerequisites
 
-- Node.js (version 16 or higher)
-- npm or yarn
+- Node.js 20.19+ or 22.12+ (Vite 7 requires one of these; 22 LTS is what this is built on)
+- npm — `package-lock.json` is committed, so use `npm ci` for a reproducible install
 
 ### Installation
 
-1. Clone the repository or download the source code
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
+```bash
+npm ci
+```
 
 ### Development
 
