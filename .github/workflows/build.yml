@@ -1,0 +1,53 @@
+# Build the app on every pull request and on every push to main.
+#
+# The last two steps are the ones that matter here. This repo commits dist/, and
+# the website repo serves that committed build from rossmooruu.org/chalice/ — so
+# a change to src/ that never gets rebuilt is invisible in the diff and ships
+# stale code. Comparing a fresh build against what is committed catches it, and
+# check-dist.mjs catches the two ways that build has actually broken.
+name: Build
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Check the build is portable to /chalice/
+        run: node .github/scripts/check-dist.mjs
+
+      - name: Check the committed dist/ matches a fresh build
+        run: |
+          if [ -n "$(git status --porcelain -- dist)" ]; then
+            echo "::error::dist/ does not match a build of the current source."
+            echo "Run 'npm run build' and commit dist/, or ./scripts/sync-to-site.sh."
+            echo
+            git status --porcelain -- dist
+            exit 1
+          fi
